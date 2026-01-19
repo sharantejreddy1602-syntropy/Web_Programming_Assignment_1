@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Riviera 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Modak&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', sans-serif;
+            overflow-x: hidden;
+            background-color: #2D0413;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2D0413; 
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container img {
+            height: 80px; 
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            margin-right: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: 30px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcccc; 
+        }
+
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-heading {
+            font-family: 'Rubik Glitch', system-ui;
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #ffffff; 
+            text-shadow: 4px 4px 0px #ff0000; 
+        }
+
+        .events-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .event-card {
+            display: flex;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            min-height: 250px;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .event-icon-container {
+            flex: 1; 
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .event-icon-container i {
+            font-size: 8rem;
+            color: rgba(0, 0, 0, 0.6);
+            filter: drop-shadow(2px 2px 5px rgba(255,255,255,0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover .event-icon-container i {
+            transform: scale(1.1) rotate(-5deg);
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .event-details {
+            flex: 3; 
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            color: #333; 
+        }
+
+        .event-title {
+            font-family: 'Modak', system-ui;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2D0413; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .event-desc {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: justify;
+            font-weight: 500;
+        }
+
+        .register-btn {
+            background-color: #d32f2f; 
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .register-btn:hover {
+            background-color: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #2D0413;
+            padding: 30px;
+            text-align: center;
+            color: white; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 2.5rem;
+            transition: transform 0.3s, color 0.3s;
+            display: inline-block;
+            color: white; 
+        }
+
+        .social-icons a:hover .fa-instagram { color: #E1306C; }
+        .social-icons a:hover .fa-facebook { color: #4267B2; }
+        .social-icons a:hover .fa-youtube { color: #FF0000; }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff; 
+            font-family: 'Calibri', sans-serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="Riviera\header-logo-2048x604.webp" alt="VIT Vellore Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="About.html">About</a>
+            <a href="Proshow.html">Proshow</a>
+            <a href="Events.html" style="color: #ffcccc;">Events</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h1 class="page-heading">Cultural Events</h1>
+
+        <div class="events-grid">
+
+            <div class="event-card" style="background-color: #e3f2fd;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-guitar"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Aikya</h2>
+                    <p class="event-desc">
+                        Prepare for a sonic explosion as "Aikya" brings the best musical talents from across the nation to the Riviera stage! This isn't just a battle of bands; it is a war of rhythms, riffs, and roaring vocals. Witness the clash of titans where thunderous drums and electrifying guitars merge to create an atmosphere of pure euphoria. It is a celebration of rebellion, harmony, and the undying spirit of rock & roll!
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #e8f5e9;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Infusion</h2>
+                    <p class="event-desc">
+                        "Infusion" is the ultimate group dance showdown where synchronicity meets soul. Watch as teams set the stage on fire with their high-octane performances, blending styles from Hip-Hop to Contemporary and Bollywood. It is a visual spectacle of coordination, energy, and storytelling through movement that will leave you tapping your feet and cheering for more!
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #fce4ec;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-person-dress"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Vogue</h2>
+                    <p class="event-desc">
+                        Step into the world of glitz and glamour with "Vogue," Riviera's flagship fashion show. Here, creativity meets couture as models strut the ramp in breathtaking ensembles that defy convention. It is a dazzling display of elegance, confidence, and cutting-edge design that transforms the campus into a high-fashion runway worthy of Paris or Milan.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #fff9c4;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-masks-theater"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Halla Bol</h2>
+                    <p class="event-desc">
+                        "Halla Bol" is the voice of the streets! This Nukkad Natak competition brings social issues to the forefront with raw energy and powerful storytelling. Without microphones or elaborate sets, these performers use their voices and emotions to shake the conscience of the audience, proving that art is the most powerful weapon for change.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #ffe0b2;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-gavel"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Crossfire</h2>
+                    <p class="event-desc">
+                        Sharpen your wits and prepare for a war of words at "Crossfire." This intense debate competition pits the sharpest minds against each other to lock horns on trending global topics. It is a test of logic, rhetoric, and persuasion where only the most articulate and quick-thinking orators will survive the heat of the argument.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #b2dfdb;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Shutterbugs</h2>
+                    <p class="event-desc">
+                        Freeze time and capture the magic with "Shutterbugs." This photography contest challenges you to find the extraordinary in the ordinary. Whether it's the play of light, a fleeting emotion, or a stunning landscape, show us your unique perspective and storytelling skills through the lens of your camera.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #e1bee7;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-om"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Nritya</h2>
+                    <p class="event-desc">
+                        "Nritya" is a celebration of grace, tradition, and expression. In this solo classical dance competition, performers bring ancient stories to life through intricate mudras and footwork. It is a mesmerizing journey into the heart of India's cultural heritage, showcasing the unparalleled beauty and discipline of classical dance forms.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #c5cae9;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Gamers Asylum</h2>
+                    <p class="event-desc">
+                        Enter the digital arena at "Gamers Asylum," the ultimate E-Sports tournament! From the tactical intensity of Valorant to the fast-paced chaos of COD Mobile, this is where virtual legends are born. Bring your squad, strat up, and dominate the leaderboard in a high-stakes battle for gaming glory.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f5fffa;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Inquisitive</h2>
+                    <p class="event-desc">
+                        Are you a walking encyclopedia? "Inquisitive" is the ultimate general quiz that tests your knowledge on everything from pop culture to obscure history. Face off against the sharpest brains in a battle of trivia where quick recall and deep knowledge are your only weapons.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #ffcdd2;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">LOL</h2>
+                    <p class="event-desc">
+                        Get ready to roll on the floor laughing at "LOL," our open mic stand-up comedy event! This is the stage for aspiring comedians to unleash their funniest punchlines, wildest stories, and sharpest satire. It's an evening of unadulterated joy where the only goal is to leave the audience in splits.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #e6e6fa;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-video"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Director's Cut</h2>
+                    <p class="event-desc">
+                        Lights, Camera, Action! "Director's Cut" is the short film making competition for visionary storytellers. Write, shoot, and edit your masterpiece to tell a compelling story in under 10 minutes. Whether it's drama, horror, or comedy, this is your chance to showcase your cinematic brilliance on the big screen.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #ffe4e1;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Masquerade</h2>
+                    <p class="event-desc">
+                        Transform faces into living art at "Masquerade," the face painting competition. Using the human face as a canvas, participants express vibrant themes and artistic skills. It creates a colorful and surreal atmosphere where creativity knows no bounds and every face tells a unique story.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f0ffff;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Swara</h2>
+                    <p class="event-desc">
+                        Let your voice soar at "Swara," the solo singing competition. Whether you specialize in Eastern classical or Western pop, this is the platform to let your inner melody shine. Captivate the audience with your soulful tunes and vocal prowess in this harmonious battle for the golden mic.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f0fff0;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Ink & Feather</h2>
+                    <p class="event-desc">
+                        Unleash the writer within at "Ink & Feather." This creative writing contest challenges you to spin tales of fantasy, horror, or drama given a set of prompts on the spot. It is a test of imagination and vocabulary where the pen is truly mightier than the sword.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f5f5dc;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Sherlocked</h2>
+                    <p class="event-desc">
+                        The game is afoot! "Sherlocked" is a thrilling campus-wide treasure hunt that will test your deductive reasoning and teamwork. Solve cryptic riddles, find hidden clues, and race against the clock to uncover the ultimate prize before your rivals do.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f5deb3;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Mr. & Ms. Riviera</h2>
+                    <p class="event-desc">
+                        Do you have the charm, wit, and talent to be the face of the fest? "Mr. & Ms. Riviera" is the ultimate personality hunt. Through rounds of talent showcases, ramp walks, and Q&A sessions, we search for the individuals who embody the true spirit, confidence, and charisma of Riviera.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #c0c0c0;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Pencil Pushers</h2>
+                    <p class="event-desc">
+                        "Pencil Pushers" is a live sketching competition for the true artists. Capture the essence of a live model or scenery using only graphite and charcoal. It is a raw test of observation and artistic technique where shadows and lines create a masterpiece in monochrome.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #d8bfd8;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Verse Wars</h2>
+                    <p class="event-desc">
+                        Step up to the mic for "Verse Wars," a poetry slam that hits hard. Express your deepest emotions, social critiques, or personal stories through rhythm and rhyme. This spoken word competition is a powerful platform for voices that refuse to be silenced.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #dda0dd;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Canvas</h2>
+                    <p class="event-desc">
+                        "Canvas" invites you to visualize ideas and communicate powerful messages through art. Whether digital or handmade, this poster-making competition challenges you to blend aesthetics with impact, creating visual narratives that capture attention and provoke thought.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+            <div class="event-card" style="background-color: #f0e68c;">
+                <div class="event-icon-container">
+                    <i class="fa-solid fa-headphones"></i>
+                </div>
+                <div class="event-details">
+                    <h2 class="event-title">Beat It</h2>
+                    <p class="event-desc">
+                        Create music without instruments at "Beat It," the beatboxing championship! Using only the power of your vocal cords, mimic drums, basslines, and rhythms to create complex soundscapes. It is a display of raw vocal talent and rhythm that will leave the crowd stunned.
+                    </p>
+                    <a href="Register.html" class="register-btn">Register Now</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/rivieravituniversity/" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/rivieraVITUniversity/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.youtube.com/@VITUniversityVellore" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <div class="quote">
+            "VIT Quality Never Ending Policy"
+        </div>
+    </footer>
+
+</body>
+</html>

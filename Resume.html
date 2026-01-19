@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Madem Sharan Tej Reddy</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --main-font: 'EB Garamond', 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.4;
+            color: #000;
+            background-color: #333; /* Changed to Dark Grey */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+            margin: 0;
+        }
+
+        .resume-container {
+            background-color: white;
+            width: 100%;
+            max-width: 800px;
+            border: 2px solid #000;
+            border-top: none; /* Keeps it flush with the top */
+            border: 2px solid #000;
+            padding: 40px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            font-size: 16px;
+        }
+
+        .contact-info a {
+            color: #000;
+            text-decoration: underline; /* Links are underlined */
+        }
+
+        h2 {
+            font-size: 18px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .entry {
+            margin-bottom: 12px;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .entry-sub {
+            display: flex;
+            justify-content: space-between;
+            font-style: italic;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 2px;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: 1px solid white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .download-btn:hover {
+            background-color: #555;
+            border-color: #ddd;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                display: block;
+            }
+            .resume-container {
+                border: 2px solid #000;
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                padding: 30px;
+                margin: 0;
+            }
+            .download-btn {
+                display: none;
+            }
+            @page {
+                margin: 0.5cm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="download-btn" onclick="window.print()">Download as PDF</button>
+
+    <div class="resume-container">
+        <header>
+            <h1>Madem Sharan Tej Reddy</h1>
+            <div class="contact-info">
+                +91-9347684556 | 
+                <a href="mailto:sharantejreddy1602@gmail.com">sharantejreddy1602@gmail.com</a> | 
+                <a href="https://linkedin.com/in/madem-sharan-tej-reddy">linkedin.com/in/madem-sharan-tej-reddy</a> | 
+                <a href="https://github.com/sharantejreddy">github.com/sharantejreddy</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Education</h2>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Vellore Institute of Technology</span>
+                    <span>Vellore, Tamil Nadu, India</span>
+                </div>
+                <div class="entry-sub">
+                    <span>Bachelor of Technology in Computer Science and Engineering</span>
+                    <span>2024 - 2028</span>
+                </div>
+                <ul>
+                    <li>CGPA: 9.79 / 10.0</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Gowtham Junior College</span>
+                    <span>Telangana, India</span>
+                </div>
+                <div class="entry-sub">
+                    <span>Intermediate (XI - XII) - MPC</span>
+                    <span>2022 - 2024</span>
+                </div>
+                <ul>
+                    <li>Percentage: 98.5%</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Aditya High School</span>
+                    <span>Andhra Pradesh, India</span>
+                </div>
+                <div class="entry-sub">
+                    <span>Secondary School (Class X)</span>
+                    <span>2021 - 2022</span>
+                </div>
+                <ul>
+                    <li>Percentage: 569/600</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Deep Learning Based Cattle Species Recognition</span>
+                    <span style="font-weight: normal; font-size: 0.9em;">Python, YOLO, OpenCV, Deep Learning</span>
+                </div>
+                <ul>
+                    <li>Developed a deep learning system using YOLO to classify cattle species (cow or buffalo) from images.</li>
+                    <li>Performed data preprocessing, image annotation, and model training for accurate detection.</li>
+                    <li>Improved model performance through dataset refinement and hyperparameter tuning, achieving reliable classification results.</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Smart Radius-Based Locker System</span>
+                    <span style="font-weight: normal; font-size: 0.9em;">Python, IoT Concepts</span>
+                </div>
+                <ul>
+                    <li>Designed a smart locker system that unlocks only when the authorized user is within a predefined geographic radius.</li>
+                    <li>Implemented location-based authentication to enhance security and prevent unauthorized access.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <ul>
+                <li><strong>Programming Languages:</strong> Python, C, C++, Java</li>
+                <li><strong>Core Concepts:</strong> Data Structures and Algorithms, Object-Oriented Programming</li>
+                <li><strong>Machine Learning:</strong> Machine Learning, Deep Learning, Computer Vision, YOLO</li>
+                <li><strong>Web Technologies:</strong> HTML, CSS</li>
+                <li><strong>Tools:</strong> Git</li>
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>

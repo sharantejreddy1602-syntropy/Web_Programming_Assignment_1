@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proshow - Riviera 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Modak&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', sans-serif;
+            overflow-x: hidden;
+            background-color: #2D0413;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2D0413; 
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container img {
+            height: 80px; 
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            margin-right: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: 30px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcccc; 
+        }
+
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .glitch-title {
+            font-family: 'Rubik Glitch', system-ui;
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffffff; 
+            text-shadow: 4px 4px 0px #ff0000; 
+        }
+
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .schedule-row {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        .day-card {
+            background-color: #007BFF; 
+            color: white;
+            padding: 20px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2); 
+        }
+
+        .day-title {
+            font-family: 'Modak', system-ui;
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .calendar-icon {
+            font-size: 2rem;
+            color: red; 
+            margin-bottom: 5px;
+        }
+
+        .day-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: red; 
+        }
+
+        .guest-gallery {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .guest-img {
+            height: 200px; 
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+            transition: transform 0.3s ease; 
+            cursor: pointer;
+        }
+
+        .guest-img:hover {
+            transform: scale(1.15); 
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(255,255,255,0.8); 
+        }
+
+        .form-wrapper {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .registration-heading {
+            text-align: center;
+            font-family: 'Calibri', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            color: #003366;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #003366;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .registration-heading-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        .reg-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group input[type="file"] {
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Calibri', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group select:focus {
+            border-color: #003366;
+            outline: none;
+        }
+
+        .submit-btn {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #002244;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #2D0413;
+            padding: 30px;
+            text-align: center;
+            color: white; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 2.5rem;
+            transition: transform 0.3s, color 0.3s;
+            display: inline-block;
+            color: white; 
+        }
+
+        .social-icons a:hover .fa-instagram { color: #E1306C; }
+        .social-icons a:hover .fa-facebook { color: #4267B2; }
+        .social-icons a:hover .fa-youtube { color: #FF0000; }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff; 
+            font-family: 'Calibri', sans-serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="Riviera\header-logo-2048x604.webp" alt="VIT Vellore Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="About.html">About</a>
+            <a href="Proshow.html" style="color: #ffcccc;">Proshow</a>
+            <a href="Events.html">Events</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        
+        <h1 class="glitch-title">Riviera 2025</h1>
+
+        <div class="schedule-container">
+
+            <div class="schedule-row">
+                <div class="day-card">
+                    <div class="day-title">DAY-1</div>
+                    <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    <div class="day-date">20th FEB 2025</div>
+                </div>
+                <div class="guest-gallery">
+                    <img src="Riviera\DAY-1-INAUGURATION-GUEST.webp" alt="Inauguration Guest" class="guest-img">
+                    <img src="Riviera\Day-1-Proshow-1-scaled.webp" alt="Day 1 Proshow 1" class="guest-img">
+                    <img src="Riviera\Day-1-Proshow-2.webp" alt="Day 1 Proshow 2" class="guest-img">
+                </div>
+            </div>
+
+            <div class="schedule-row">
+                <div class="day-card">
+                    <div class="day-title">DAY-2</div>
+                    <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    <div class="day-date">21st FEB 2025</div>
+                </div>
+                <div class="guest-gallery">
+                    <img src="Riviera\Day-2-Proshow-2.webp" alt="Day 2 Proshow 2" class="guest-img">
+                    <img src="Riviera\Day-2-Proshow-1.webp" alt="Day 2 Proshow 1" class="guest-img">
+                </div>
+            </div>
+
+            <div class="schedule-row">
+                <div class="day-card">
+                    <div class="day-title">DAY-3</div>
+                    <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    <div class="day-date">22nd FEB 2025</div>
+                </div>
+                <div class="guest-gallery">
+                    <img src="Riviera\Day-3-Proshow-2.webp" alt="Day 3 Proshow 2" class="guest-img">
+                    <img src="Riviera\Day-3-Proshow-1.webp" alt="Day 3 Proshow 1" class="guest-img">
+                </div>
+            </div>
+
+            <div class="schedule-row">
+                <div class="day-card">
+                    <div class="day-title">DAY-4</div>
+                    <i class="fa-solid fa-calendar-days calendar-icon"></i>
+                    <div class="day-date">23rd FEB 2025</div>
+                </div>
+                <div class="guest-gallery">
+                    <img src="Riviera\DAY-4-Valedictory-Guest-scaled.webp" alt="Valedictory Guest" class="guest-img">
+                    <img src="Riviera\DAY-4-Proshow.webp" alt="Day 4 Proshow" class="guest-img">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-wrapper">
+            <div class="registration-heading-container">
+                <h2 class="registration-heading">Registration</h2>
+            </div>
+            
+            <form class="reg-form" action="#" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">Name: <span style="color: red;">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="regno">Registration Number: <span style="color: red;">*</span></label>
+                    <input type="text" id="regno" name="regno" placeholder="e.g., 23BCE1234" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender: <span style="color: red;">*</span></label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentStatus">Payment Status: <span style="color: red;">*</span></label>
+                    <select id="paymentStatus" name="paymentStatus" required>
+                        <option value="" disabled selected>Select Payment Status</option>
+                        <option value="Done">Payment done in VTOP</option>
+                        <option value="NotDone">Payment not done in VTOP</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="receipt">Upload Receipt (Screenshot): <span style="color: red;">*</span></label>
+                    <input type="file" id="receipt" name="receipt" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/rivieravituniversity/" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/rivieraVITUniversity/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.youtube.com/@VITUniversityVellore" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <div class="quote">
+            "VIT Quality Never Ending Policy"
+        </div>
+    </footer>
+
+</body>
+</html>

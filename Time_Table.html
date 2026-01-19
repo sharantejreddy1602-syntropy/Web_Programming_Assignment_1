@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            color: #000000;
+        }
+
+        .main-wrapper {
+            /* Removed grey border */
+            background-color: white;
+            padding: 20px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+
+        /* --- First Table Styles --- */
+        .table-container {
+            overflow-x: auto;
+            background-color: white;
+            border: 2px solid #666; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1400px;
+            font-size: 13px;
+            table-layout: fixed;
+        }
+
+        .course-table th {
+            padding: 15px 5px;
+            border: 1px solid #666; 
+            font-weight: 600;
+            white-space: normal;
+            background-color: #3b8ab9; 
+            color: white;
+            text-align: center;
+        }
+
+        .course-table td {
+            padding: 20px 8px;
+            border: 1px solid #666; 
+            color: #000000; 
+            vertical-align: middle;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        /* Column Widths for First Table */
+        .col-1 { width: 50px; }
+        .col-2 { width: 90px; }
+        .col-3 { width: 320px; }
+        .col-4 { width: 50px; }
+        .col-5 { width: 90px; }
+        .col-6 { width: 80px; }
+        .col-7 { width: 120px; }
+        .col-8 { width: 110px; }
+        .col-9 { width: 180px; }
+        .col-10 { width: 120px; }
+        .col-11 { width: 110px; }
+        .col-12 { width: 110px; }
+
+        .course-table td:nth-child(3) {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .course-table td:nth-child(9) {
+            text-align: left;
+            white-space: nowrap; 
+            line-height: 1.4;
+        }
+
+        .course-table td:last-child {
+            color: #fafafa;
+            font-weight: 600;
+        }
+
+        .credits-box {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+            font-size: 12px;
+        }
+
+        .footer-row {
+            background-color: #3b8ab9; 
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .footer-row td {
+            color: white;
+            border: 1px solid #666;
+            padding: 15px;
+        }
+
+        /* --- Second Table (Weekly) Styles --- */
+        .weekly-table-container {
+            overflow-x: auto;
+            border: 1px solid #5b9bd5;
+        }
+
+        .weekly-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1550px; 
+            font-size: 14px; 
+            text-align: center;
+            table-layout: fixed;
+            color: #000000;
+        }
+
+        .weekly-table th, .weekly-table td {
+            border: 1px solid #5b9bd5;
+            padding: 10px 5px; 
+            font-weight: normal;
+            height: 50px; 
+            color: #000000;
+            vertical-align: middle;
+        }
+
+        /* Weekly Table Column Widths (16 Columns Total) */
+        .weekly-table col:nth-child(1) { width: 80px; }
+        .weekly-table col:nth-child(2) { width: 70px; }
+        .weekly-table col:nth-child(3) { width: 70px; }
+        .weekly-table col:nth-child(4) { width: 70px; }
+        .weekly-table col:nth-child(5) { width: 70px; }
+        .weekly-table col:nth-child(6) { width: 70px; }
+        .weekly-table col:nth-child(7) { width: 70px; }
+        .weekly-table col:nth-child(8) { width: 70px; } 
+        .weekly-table col:nth-child(9) { width: 60px; } /* Lunch */
+        .weekly-table col:nth-child(10) { width: 70px; }
+        .weekly-table col:nth-child(11) { width: 70px; }
+        .weekly-table col:nth-child(12) { width: 70px; }
+        .weekly-table col:nth-child(13) { width: 70px; }
+        .weekly-table col:nth-child(14) { width: 70px; }
+        .weekly-table col:nth-child(15) { width: 70px; }
+        .weekly-table col:nth-child(16) { width: 70px; }
+
+        .col-header-grey {
+            background-color: #E7E6E6; 
+            color: #000000;
+        }
+
+        .bg-pink {
+            background-color: #ff6b6b;
+            color: #000000;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <h1>Time Table</h1>
+
+    <div class="table-container">
+        <table class="course-table">
+            <thead>
+                <tr>
+                    <th class="col-1">Sl.No</th>
+                    <th class="col-2">Class Group</th>
+                    <th class="col-3">Course</th>
+                    <th class="col-4">L T P J C</th>
+                    <th class="col-5">Category</th>
+                    <th class="col-6">Course Option</th>
+                    <th class="col-7">Class Id</th>
+                    <th class="col-8">Slot/ Venue</th>
+                    <th class="col-9">Faculty Details</th>
+                    <th class="col-10">Registered / Updated Date & Time</th>
+                    <th class="col-11">Attendance Date/ Type</th>
+                    <th class="col-12">Status & Ref. No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE203E - Web Programming<br><strong>( Embedded Theory )</strong></td>
+                    <td><div class="credits-box"><span>1 0</span><span>0 0</span><span>1.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260503884</td>
+                    <td>TAA2 - <br><br><strong>PRP250</strong></td>
+                    <td>REYA SHARMA - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:01</td>
+                    <td>02-Nov-2025<br>- <strong>Manual</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE203E - Web Programming<br><strong>( Embedded Lab )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>4 0</span><span>2.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260504646</td>
+                    <td>L9+L10+L19+L20 - <br><br><strong>PRP138</strong></td>
+                    <td>REYA SHARMA - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:01</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE204L - Design and Analysis of Algorithms<br><strong>( Theory Only )</strong></td>
+                    <td><div class="credits-box"><span>3 0</span><span>0 0</span><span>3.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260501887</td>
+                    <td>F2+TF2 - <br><br><strong>PRP425</strong></td>
+                    <td>SHARIEF BASHA S - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:01</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE204P - Design and Analysis of Algorithms Lab<br><strong>( Lab Only )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>2 0</span><span>1.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260504980</td>
+                    <td>L7+L8 - <br><br><strong>PRP233</strong></td>
+                    <td>SHARIEF BASHA S - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:01</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE205L - Computer Architecture and Organization<br><strong>( Theory Only )</strong></td>
+                    <td><div class="credits-box"><span>3 0</span><span>0 0</span><span>3.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260501902</td>
+                    <td>A2+TA2 - <br><br><strong>PRP224</strong></td>
+                    <td>BHULAKSHMI BONTHU - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:02</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE304L - Theory of Computation<br><strong>( Theory Only )</strong></td>
+                    <td><div class="credits-box"><span>3 0</span><span>0 0</span><span>3.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260501245</td>
+                    <td>E2+TE2 - <br><br><strong>PRP219</strong></td>
+                    <td>KARTHIK G M - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:02</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE309L - Cryptography and Network Security<br><strong>( Theory Only )</strong></td>
+                    <td><div class="credits-box"><span>3 0</span><span>0 0</span><span>3.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260501961</td>
+                    <td>B2+TB2 - <br><br><strong>SJT407</strong></td>
+                    <td>MADHU VISWANATHAM V - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:03</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>General (Semester)</td>
+                    <td>BCSE309P - Cryptography and Network Security Lab<br><strong>( Lab Only )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>2 0</span><span>1.0</span></div></td>
+                    <td>Discipline Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260504524</td>
+                    <td>L15+L16 - <br><br><strong>SJT620</strong></td>
+                    <td>MADHU VISWANATHAM V - <br><br><strong>SCOPE</strong></td>
+                    <td>01-Nov-2025 17:03</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>General (Semester)</td>
+                    <td>BECE204L - Microprocessors and Microcontrollers<br><strong>( Theory Only )</strong></td>
+                    <td><div class="credits-box"><span>3 0</span><span>0 0</span><span>3.0</span></div></td>
+                    <td>Discipline-linked Engineering Sciences</td>
+                    <td>Regular</td>
+                    <td>VL2025260501019</td>
+                    <td>C2+TC2 - <br><br><strong>PRP207</strong></td>
+                    <td>AVINASH CHANDRA - <br><br><strong>SENSE</strong></td>
+                    <td>01-Nov-2025 17:00</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>General (Semester)</td>
+                    <td>BECE204P - Microprocessors and Microcontrollers Lab<br><strong>( Lab Only )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>2 0</span><span>1.0</span></div></td>
+                    <td>Discipline-linked Engineering Sciences</td>
+                    <td>Regular</td>
+                    <td>VL2025260505378</td>
+                    <td>L5+L6 - <br><br><strong>PRP135</strong></td>
+                    <td>AVINASH CHANDRA - <br><br><strong>SENSE</strong></td>
+                    <td>01-Nov-2025 17:00</td>
+                    <td>02-Nov-2025<br>- <strong>Biometric</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>General (Semester)</td>
+                    <td>BSSC101N - Essence of Traditional Knowledge<br><strong>( Online Course )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>0 0</span><span>2.0</span></div></td>
+                    <td>Non-graded Core Requirement</td>
+                    <td>Regular</td>
+                    <td>VL2025260500307</td>
+                    <td>NIL - <br><br><strong>NIL</strong></td>
+                    <td>ABHIJIT DASGUPTA - <br><br><strong>SSL</strong></td>
+                    <td>01-Nov-2025 17:00</td>
+                    <td>02-Nov-2025<br>- <strong>Manual</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>General (Semester)</td>
+                    <td>BSTS102P - Quantitative Skills Practice II<br><strong>( Soft Skill )</strong></td>
+                    <td><div class="credits-box"><span>0 0</span><span>3 0</span><span>1.5</span></div></td>
+                    <td>Foundation Core</td>
+                    <td>Regular</td>
+                    <td>VL2025260500075</td>
+                    <td>D2+TD2 - <br><br><strong>PRP204</strong></td>
+                    <td>FACE (APT) - <br><br><strong>SSL</strong></td>
+                    <td>01-Nov-2025 17:00</td>
+                    <td>02-Nov-2025<br>- <strong>Manual</strong></td>
+                    <td>Registered and Approved</td>
+                </tr>
+                <tr class="footer-row">
+                    <td colspan="12">Total Number Of Credits: 24.5</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="weekly-table-container">
+        <table class="weekly-table">
+            <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            
+            <tr class="col-header-grey">
+                <td rowspan="2" class="col-header-grey">THEORY</td>
+                <td class="col-header-grey">Start</td>
+                <td>08:00</td><td>09:00</td><td>10:00</td><td>11:00</td><td>12:00</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>14:00</td><td>15:00</td><td>16:00</td><td>17:00</td><td>18:00</td><td>18:51</td><td>19:01</td>
+            </tr>
+            <tr class="col-header-grey">
+                <td class="col-header-grey">End</td>
+                <td>08:50</td><td>09:50</td><td>10:50</td><td>11:50</td><td>12:50</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>14:50</td><td>15:50</td><td>16:50</td><td>17:50</td><td>18:50</td><td>19:00</td><td>19:50</td>
+            </tr>
+            <tr class="col-header-grey">
+                <td rowspan="2" class="col-header-grey">LAB</td>
+                <td class="col-header-grey">Start</td>
+                <td>08:00</td><td>08:51</td><td>09:51</td><td>10:41</td><td>11:40</td><td>12:31</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>14:00</td><td>14:51</td><td>15:51</td><td>16:41</td><td>17:40</td><td>18:31</td><td>-</td>
+            </tr>
+            <tr class="col-header-grey">
+                <td class="col-header-grey">End</td>
+                <td>08:50</td><td>09:40</td><td>10:40</td><td>11:30</td><td>12:30</td><td>13:20</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>14:50</td><td>15:40</td><td>16:40</td><td>17:30</td><td>18:30</td><td>19:20</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">MON</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>A1</td><td>F1</td><td>D1</td><td>TB1</td><td>TG1</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td class="bg-pink">A2-BCSE205L-<br>TH-PRP224-ALL</td>
+                <td class="bg-pink">F2-BCSE204L-<br>TH-PRP425-ALL</td>
+                <td class="bg-pink">D2-BSTS102P-<br>SS-PRP204-ALL</td>
+                <td class="bg-pink">TB2-BCSE309L-<br>TH-SJT407-ALL</td>
+                <td>TG2</td><td>-</td><td>V3</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td>L1</td><td>L2</td><td>L3</td><td>L4</td>
+                <td class="bg-pink">L5-BECE204P-<br>LO-PRP135-ALL</td>
+                <td class="bg-pink">L6-BECE204P-<br>LO-PRP135-ALL</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L31</td><td>L32</td><td>L33</td><td>L34</td><td>L35</td><td>L36</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">TUE</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>B1</td><td>G1</td><td>E1</td><td>TC1</td><td>TAA1</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td class="bg-pink">B2-BCSE309L-<br>TH-SJT407-ALL</td>
+                <td>G2</td>
+                <td class="bg-pink">E2-BCSE304L-<br>TH-PRP219-ALL</td>
+                <td class="bg-pink">TC2-BECE204L-<br>TH-PRP207-ALL</td>
+                <td class="bg-pink">TAA2-<br>BCSE203E-ETH-<br>PRP250-ALL</td>
+                <td>-</td><td>V4</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td class="bg-pink">L7-BCSE204P-<br>LO-PRP233-ALL</td>
+                <td class="bg-pink">L8-BCSE204P-<br>LO-PRP233-ALL</td>
+                <td class="bg-pink">L9-BCSE203E-<br>ELA-PRP138-<br>ALL</td>
+                <td class="bg-pink">L10-BCSE203E-<br>ELA-PRP138-<br>ALL</td>
+                <td>L11</td><td>L12</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L37</td><td>L38</td><td>L39</td><td>L40</td><td>L41</td><td>L42</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">WED</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>C1</td><td>A1</td><td>F1</td><td>V1</td><td>V2</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td class="bg-pink">C2-BECE204L-<br>TH-PRP207-ALL</td>
+                <td class="bg-pink">A2-BCSE205L-<br>TH-PRP224-ALL</td>
+                <td class="bg-pink">F2-BCSE204L-<br>TH-PRP425-ALL</td>
+                <td class="bg-pink">TD2-BSTS102P-<br>SS-PRP204-ALL</td>
+                <td>TBB2</td><td>-</td><td>V5</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td>L13</td><td>L14</td>
+                <td class="bg-pink">L15-BCSE309P-<br>LO-SJT620-ALL</td>
+                <td class="bg-pink">L16-BCSE309P-<br>LO-SJT620-ALL</td>
+                <td>L17</td><td>L18</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L43</td><td>L44</td><td>L45</td><td>L46</td><td>L47</td><td>L48</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">THU</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>D1</td><td>B1</td><td>G1</td><td>TE1</td><td>TCC1</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td class="bg-pink">D2-BSTS102P-<br>SS-PRP204-ALL</td>
+                <td class="bg-pink">B2-BCSE309L-<br>TH-SJT407-ALL</td>
+                <td>G2</td>
+                <td class="bg-pink">TE2-BCSE304L-<br>TH-PRP219-ALL</td>
+                <td>TCC2</td><td>-</td><td>V6</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td class="bg-pink">L19-BCSE203E-<br>ELA-PRP138-<br>ALL</td>
+                <td class="bg-pink">L20-BCSE203E-<br>ELA-PRP138-<br>ALL</td>
+                <td>L21</td><td>L22</td><td>L23</td><td>L24</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L49</td><td>L50</td><td>L51</td><td>L52</td><td>L53</td><td>L54</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">FRI</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>E1</td><td>C1</td><td>TA1</td><td>TF1</td><td>TD1</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td class="bg-pink">E2-BCSE304L-<br>TH-PRP219-ALL</td>
+                <td class="bg-pink">C2-BECE204L-<br>TH-PRP207-ALL</td>
+                <td class="bg-pink">TA2-BCSE205L-<br>TH-PRP224-ALL</td>
+                <td class="bg-pink">TF2-BCSE204L-<br>TH-PRP425-ALL</td>
+                <td>TDD2</td><td>-</td><td>V7</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td>L25</td><td>L26</td><td>L27</td><td>L28</td><td>L29</td><td>L30</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L55</td><td>L56</td><td>L57</td><td>L58</td><td>L59</td><td>L60</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">SAT</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>V8</td><td>X11</td><td>X12</td><td>Y11</td><td>Y12</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>X21</td><td>Z21</td><td>Y21</td><td>W21</td><td>W22</td><td>-</td><td>V9</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td>L71</td><td>L72</td><td>L73</td><td>L74</td><td>L75</td><td>L76</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L77</td><td>L78</td><td>L79</td><td>L80</td><td>L81</td><td>L82</td><td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" class="col-header-grey">SUN</td>
+                <td class="col-header-grey">THEORY</td>
+                <td>V10</td><td>Y11</td><td>Y12</td><td>X11</td><td>X12</td><td>-</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>Y21</td><td>Z21</td><td>X21</td><td>W21</td><td>W22</td><td>-</td><td>V11</td>
+            </tr>
+            <tr>
+                <td class="col-header-grey">LAB</td>
+                <td>L83</td><td>L84</td><td>L85</td><td>L86</td><td>L87</td><td>L88</td>
+                <td class="col-header-grey">Lunch</td>
+                <td>L89</td><td>L90</td><td>L91</td><td>L92</td><td>L93</td><td>L94</td><td>-</td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
